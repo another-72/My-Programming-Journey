@@ -62,3 +62,24 @@ int main()
     cerr << "Runtime : " << elapsed.count() << " ms\n";
     return 0;
 }
+
+/*
+    Condition 1 : a + b + c <= x
+    Condition 2 : ab + bc + ca <= n
+    Condition 3 : a, b, c > 0
+
+    Fixing b = 1, c = 1 => highest possible value of a, which will be (n - 1) / 2
+
+    Fixing c = 1 => ab + a + b <= n
+    => (a + 1)(b + 1) <= n + 1
+    => As a goes from 1 to (n - 1) / 2, b only goes to (n - a)/(a + 1) times.
+    => So, if we loop for a and loop for b from (n - a)/(a + 1), then then the time complexity for this structure will be nlogn
+       as the b doesn't completely go till a constant.
+    => We can traverse through a & b in O(nlogn) and get c as min(x - a - b, (n - ab)/(a + b))
+
+    ****Optimisation****
+    The problem is symmetric with respect to a, b and c => we can multiply the answer with 3! for problems where a != b != c - (A)
+    In case a = b = c, we can seperate these cases out - (B)
+
+    Total Cases = 3A + B
+*/
