@@ -78,7 +78,7 @@ int main()
     => We can traverse through a & b in O(nlogn) and get c as min(x - a - b, (n - ab)/(a + b))
 
     ****Optimisation****
-    The problem is symmetric with respect to a, b and c => we can multiply the answer with 3! for problems where a != b != c - (A)
+    The problem is symmetric with respect to a, b and c => we can multiply the answer with 3! for problems where a != b != c and a > b > c - (A)
     In case a = b = c, we can seperate these cases out - (B)
 
     Total Cases = 3A + B
