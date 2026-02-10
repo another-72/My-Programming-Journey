@@ -110,5 +110,7 @@ int main()
     2. We can multiply by 3! / 2! for cases where a = b != c - (B cases)
     In case a = b = c, we can seperate these cases out - (C)
 
+    Time Complexity of optimised() as well as solve() is O(nlogn)
+
     Total Cases = 6A + 3B + C
 */
