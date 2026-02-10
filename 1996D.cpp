@@ -46,6 +46,33 @@ void solve()
     cout << ans << '\n';
 }
 
+void optimised()
+{
+    ll n, x;
+    cin >> n >> x;
+
+    ll ans = 0;
+
+    for(ll a = 1; a <= x - 2 && a <= (n - 1) / 2; a++) // a > b > c
+    {
+        for(ll b = 1; b <= (n - a) / (a + 1) && b <= x - a - 1 && a > b; b++)
+        {
+            ans += 6 * min({(n - a * b) / (a + b), x - a - b, b - 1});
+        }
+    }
+
+    for(ll a = 1; a <= min((ll)sqrt(n + 1) - 1, (x - 1) / 2); a++) // a = b != c
+    {
+        ll temp = min((n - a * a) / (2 * a), x - 2 * a);
+        if(temp >= a) temp--; // Removing a = b = c case
+        ans += 3 * temp;
+    }
+
+    ans += min(x / 3, (ll)sqrt(n / 3.0)); // a = b = c
+
+    cout << ans << '\n';
+}
+
 int main()
 {
     auto start = chrono::high_resolution_clock::now();
@@ -54,7 +81,7 @@ int main()
     int t = 1;
     if(MULTI_TEST) cin >> t;
 
-    while(t--) solve();
+    while(t--) optimised();
 
     auto end = chrono::high_resolution_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
@@ -78,8 +105,10 @@ int main()
     => We can traverse through a & b in O(nlogn) and get c as min(x - a - b, (n - ab)/(a + b))
 
     ****Optimisation****
-    The problem is symmetric with respect to a, b and c => we can multiply the answer with 3! for problems where a != b != c and a > b > c - (A)
-    In case a = b = c, we can seperate these cases out - (B)
+    The problem is symmetric with respect to a, b and c =>
+    1. We can multiply the answer with 3! for problems where a != b != c and a > b > c - (A cases)
+    2. We can multiply by 3! / 2! for cases where a = b != c - (B cases)
+    In case a = b = c, we can seperate these cases out - (C)
 
-    Total Cases = 3A + B
+    Total Cases = 6A + 3B + C
 */
