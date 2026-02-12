@@ -28,6 +28,37 @@ using ordered_multiset = tree<
 
 bool MULTI_TEST = true;
 
+void brute()
+{
+    ll n;
+    cin >> n;
+
+    vector<ll> a(n, 0), b(n, 0);
+
+    for(ll i = 0; i < n; i++) cin >> a[i];
+    for(ll i = 0; i < n; i++) cin >> b[i];
+
+    ll x = 1, ans = 0, maxx = *max_element(a.begin(), a.end());
+    while(x <= maxx + 1)
+    {
+        ll i = 0, j = 0;
+        for(i = 0; i < n; i++)
+        {
+            ll count = 0;
+            if(j == n) break;
+            while(j < n && count < b[i])
+            {
+                if(a[j++] >= x) count++;
+            }
+            if(count < b[i]) break;
+        }
+
+        ans = max(ans, i * (x++));
+    }
+
+    cout << ans << '\n';
+}
+
 void solve()
 {
     ll n;
