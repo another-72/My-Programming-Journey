@@ -1,7 +1,3 @@
-/*
-   Date : 13th Feb 2026
-   Revisit
-*/
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
@@ -39,19 +35,19 @@ void solve()
     {
         temp /= 3;
         xl++;
-    }
+    } // O(log_3(l))
 
     temp = r;
     while(temp > 0)
     {
         temp /= 3;
         xr++;
-    }
+    } // O(log_3(r))
 
-    ll fact = pow(3, xl);
+    ll fact = pow(3, xl); // O(log_2(log_3(l)))
     ans += (fact - l) * xl;
 
-    for(ll i = xl + 1; i < xr; i++)
+    for(ll i = xl + 1; i < xr; i++) // O(log_3(r / l))
     {
         ans += 2 * fact * i;
         fact = fact * 3;
@@ -78,3 +74,5 @@ int main()
     cerr << "Runtime : " << elapsed.count() << " ms\n";
     return 0;
 }
+
+// Total Time Complexity : O(2 * log_3(r) + log_2(log_3(l))) for exh query
