@@ -1,6 +1,6 @@
 /*
     Date : 8th Feb 2026
-    Revisist
+    Revisit
 */
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
